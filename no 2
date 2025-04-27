@@ -1,0 +1,49 @@
+def main():
+    # Data mahasiswa dalam bentuk list of dictionaries
+    data_mahasiswa = [
+        {"nama": "Andi", "nim": "101", "nilai_uts": 85, "nilai_uas": 90, "nilai_tugas": 80},
+        {"nama": "Budi", "nim": "102", "nilai_uts": 75, "nilai_uas": 80, "nilai_tugas": 70},
+        {"nama": "Cici", "nim": "103", "nilai_uts": 60, "nilai_uas": 65, "nilai_tugas": 70},
+        {"nama": "Dedi", "nim": "104", "nilai_uts": 50, "nilai_uas": 55, "nilai_tugas": 60},
+        {"nama": "Eka", "nim": "105", "nilai_uts": 40, "nilai_uas": 45, "nilai_tugas": 50}
+    ]
+
+    # Hitung nilai akhir dan tentukan grade untuk setiap mahasiswa
+    for mahasiswa in data_mahasiswa:
+        nilai_akhir = (0.3 * mahasiswa["nilai_uts"]) + (0.4 * mahasiswa["nilai_uas"]) + (0.3 * mahasiswa["nilai_tugas"])
+        mahasiswa["nilai_akhir"] = round(nilai_akhir, 2)
+        
+        if nilai_akhir >= 80:
+            mahasiswa["grade"] = "A"
+        elif 70 <= nilai_akhir < 80:
+            mahasiswa["grade"] = "B"
+        elif 60 <= nilai_akhir < 70:
+            mahasiswa["grade"] = "C"
+        elif 50 <= nilai_akhir < 60:
+            mahasiswa["grade"] = "D"
+        else:
+            mahasiswa["grade"] = "E"
+
+    # Tampilkan data dalam format tabel
+    print("\nDAFTAR NILAI MAHASISWA")
+    print("="*70)
+    print(f"{'No.':<5} {'NIM':<10} {'Nama':<15} {'UTS':<5} {'UAS':<5} {'Tugas':<6} {'Akhir':<6} {'Grade':<5}")
+    print("-"*70)
+    
+    for i, mahasiswa in enumerate(data_mahasiswa, 1):
+        print(f"{i:<5} {mahasiswa['nim']:<10} {mahasiswa['nama']:<15} "
+              f"{mahasiswa['nilai_uts']:<5} {mahasiswa['nilai_uas']:<5} "
+              f"{mahasiswa['nilai_tugas']:<6} {mahasiswa['nilai_akhir']:<6.1f} "
+              f"{mahasiswa['grade']:<5}")
+
+    # Cari nilai tertinggi dan terendah
+    nilai_akhir_list = [m["nilai_akhir"] for m in data_mahasiswa]
+    max_index = nilai_akhir_list.index(max(nilai_akhir_list))
+    min_index = nilai_akhir_list.index(min(nilai_akhir_list))
+    
+    print("\nREKAP:")
+    print(f"Nilai tertinggi: {data_mahasiswa[max_index]['nama']} ({data_mahasiswa[max_index]['nilai_akhir']})")
+    print(f"Nilai terendah: {data_mahasiswa[min_index]['nama']} ({data_mahasiswa[min_index]['nilai_akhir']})")
+
+if __name__ == "__main__":
+    main()
